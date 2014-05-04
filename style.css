@@ -1,0 +1,92 @@
+img.logo {
+		width: 120px;
+		height: auto;
+	}
+	
+img.faq{
+	width:20px;
+	height:auto;
+}
+
+img.banda{
+	width:120px;
+	height:auto;
+}
+
+img.schema {
+	width:300px;
+	height:auto;
+}
+
+img.guide {
+	width:500px;
+	height:auto;
+}
+	
+body {
+	color: #666666;
+	font-size:16pt;
+	line-height:1.4em;
+}
+
+p.top-catch {
+	font-size:32pt;
+	line-height:1.4em;
+}
+
+p.copyright{
+	font-size:12px;
+}
+
+ul.nav {
+	font-size:15pt;
+}
+
+div.faq{
+	width:auto;
+	max-width:800px;
+	text-align: left;
+	vertical-align: middle;
+	background-color: #EEEEEE;
+	border-width: 1px; 
+	border-radius: 10px;
+	margin: 0 auto;
+}
+div.bandabox{
+	width:auto;
+	max-width:400px;
+	background-color: #EEEEEE;
+	border-width: 1px; 
+	border-radius: 10px;
+	margin: 0 auto;
+}
+div.modal-body{
+	font-size:auto;
+	}
+
+div.q {
+	border-bottom: 1px dotted gray;
+}
+
+.navbar-fixed-top {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+}
+
+.btn-custom {
+  background-color: hsl(331, 100%, 82%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fecce4", endColorstr="#fea3cf");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#fecce4), to(#fea3cf));
+  background-image: -moz-linear-gradient(top, #fecce4, #fea3cf);
+  background-image: -ms-linear-gradient(top, #fecce4, #fea3cf);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fecce4), color-stop(100%, #fea3cf));
+  background-image: -webkit-linear-gradient(top, #fecce4, #fea3cf);
+  background-image: -o-linear-gradient(top, #fecce4, #fea3cf);
+  background-image: linear-gradient(#fecce4, #fea3cf);
+  border-color: #fea3cf #fea3cf hsl(331, 100%, 80%);
+  color: #333 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.13);
+  -webkit-font-smoothing: antialiased;
+}
