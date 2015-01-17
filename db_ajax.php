@@ -21,7 +21,7 @@ require_once('config.php');
 
 //DNの値を変える　Picsy_idが一致のデータの
 
-  $sql = "update `LAA0287235-zuqsqh`.`picsy` SET `func`= ".$func." where `id` = ".$id."";
+  $sql = "update `picsy` SET `func`= ".$func." where `id` = ".$id."";
   $result = mysql_query($sql, $link) or die("クエリの送信に失敗しました。<br />SQL:".$sql);
 //echo $result;
 

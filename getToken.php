@@ -1,7 +1,7 @@
 <?php 
 require_once('config.php');
-require_once('/home/users/1/thick.jp-tatsuaki/web/app/picsy/twitteroauth/twitteroauth.php');
-require_once('/home/users/1/thick.jp-tatsuaki/web/app/picsy/tmhOAuth.php');
+require_once('twitteroauth/twitteroauth.php');
+require_once('tmhOAuth.php');
 session_start();
 
 //echo "<br>";

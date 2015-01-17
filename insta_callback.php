@@ -6,8 +6,8 @@ if (isset($_GET['hub_challenge'])){
 	echo $challenge;
 } else {
 //echo "dont read it.<br>";
-require_once('/home/users/1/thick.jp-tatsuaki/web/app/picsy/config.php');
-require_once('/home/users/1/thick.jp-tatsuaki/web/app/picsy/tmhOAuth.php');
+require_once('config.php');
+require_once('tmhOAuth.php');
 
 
     $log_fl = "./acc_log.csv";
@@ -70,7 +70,7 @@ $obj = json_decode($json_string);
 //User_IDと一致する情報をDBから持って来る
 
 	//IDが一致するDB
-	$sql = "select * from `LAA0287235-zuqsqh`.`picsy` WHERE `insta_id` = ".$user_id;
+	$sql = "select * from `picsy` WHERE `insta_id` = ".$user_id;
 //	$result = mysql_query($sql, $link) or die("cannot send query<br> SQL:".$sql);
 	$result = mysql_query($sql, $link) or die("cannot send query<br />");
 	
@@ -148,7 +148,7 @@ fclose($fp);
 //InstaのURLがlogの最新だったらexitする
 
 	//DBの一番新しいログ取得
-	$sql = "select * from `LAA0287235-zuqsqh`.`picsy_log` ORDER BY `tweet_time` DESC limit 1";
+	$sql = "select * from `picsy_log` ORDER BY `tweet_time` DESC limit 1";
 	$result = mysql_query($sql, $link) or die("cannot send query<br />");
 	while ($row = mysql_fetch_assoc($result)) {
 		$log_url = $row['insta_url'];
@@ -207,13 +207,44 @@ $imagesize = getimagesize( $tw_img );
    ob_end_clean();//*/
 
 
+//２回投稿対策
+require_once('twitteroauth/twitteroauth.php');
+
+$TwitterOAuth = new TwitterOAuth(
+	TW_CONSUMER_KEY,
+	TW_CONSUMER_SECRET,
+	$tw_access_token,
+	$tw_access_token_secret
+	);
+
+// 1.1向け。2013/06/12以降の版であれば不要
+$TwitterOAuth->host = 'https://api.twitter.com/1.1/';
+
+//最新ツイートを２件持ってくる
+$content = $TwitterOAuth->get('statuses/user_timeline',array('count'=>'2'));
+
+$latestTweetUrl = $content[0]->entities->urls[0]->expanded_url;//最新
+$latest2TweetUrl = $content[1]->entities->urls[0]->expanded_url;
+
+//PHPの桁数の限界を超えているのでdoubleで受け取って小数点以下を消す
+$castedId= sprintf("%.0f", $content[0]->id);
+
+//２件が同じinstaのURLじゃないなら終了
+if($latestTweetUrl!=$latest2TweetUrl)exit;
+
+$status = $TwitterOAuth->post('statuses/destroy/'.$castedId);
+
+var_dump($status);
+
+//２回投稿対策ここまで
+
 $now = date('Y-m-d H:i:s');
 $fp = fopen("insta.txt", "a");
 fwrite($fp, " 書き込みが行われました ".$now);
 fclose($fp);
 
 
-	$sql = "insert into `LAA0287235-zuqsqh`.`picsy_log`
+	$sql = "insert into `picsy_log`
                 (`picsy_id`,`tweet_time`, `insta_url`) 
                 values 
                 ('".$picsy_id."',now(),'".$insta_link."')";

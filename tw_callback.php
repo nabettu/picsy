@@ -1,6 +1,6 @@
 <?php 
 require_once('config.php');
-require_once('/home/users/1/thick.jp-tatsuaki/web/app/picsy/twitteroauth/twitteroauth.php');
+require_once('twitteroauth/twitteroauth.php');
 session_start();
  
 // getToken.php でセットした oauth_token と一致するかチェック
@@ -35,7 +35,7 @@ var_dump($oauth_token_secret);echo "<br>";
   
   
 	//echo "<br>";
-	$sql = "select * from `LAA0287235-zuqsqh`.`picsy` where `tw_user_id` = ".$tw_user_id." limit 1";
+	$sql = "select * from `picsy` where `tw_user_id` = ".$tw_user_id." limit 1";
     //var_dump($sql);
 	$result = mysql_query($sql, $link) or die("cannot send query<br />SQL:".$sql);
     //var_dump($result);
@@ -54,7 +54,7 @@ var_dump($oauth_token_secret);echo "<br>";
 // 初回ユーザかチェックするロジック
   if ($db_tw_user_id==NULL) {
 
-        $sql = "insert into `LAA0287235-zuqsqh`.`picsy`
+        $sql = "insert into `picsy`
                 (`tw_user_id`,`tw_screen_name`, `tw_access_token`, `tw_access_token_secret`, `created`, `last_run`) 
                 values 
                 ('".$tw_user_id."','".$screen_name."','".$oauth_token."','".$oauth_token_secret."',now(), now())";
@@ -83,7 +83,7 @@ var_dump($oauth_token_secret);echo "<br>";
 	
 	}
  
-	$sql = "select * from `LAA0287235-zuqsqh`.`picsy` where `tw_user_id` = ".$tw_user_id." limit 1";
+	$sql = "select * from `picsy` where `tw_user_id` = ".$tw_user_id." limit 1";
 	$result = mysql_query($sql, $link) or die("cannot send query<br />SQL:".$sql);
 	while ($row = mysql_fetch_assoc($result)) {
 		$user_name = $row['tw_screen_name'];

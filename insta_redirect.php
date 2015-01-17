@@ -60,7 +60,7 @@ if (empty($_GET['code'])) {
   // データベースを選択する
   $sdb = mysql_select_db($DB_NAME,$link) or die("データベースの選択に失敗しました。");
   
-  $sql = "update `LAA0287235-zuqsqh`.`picsy`
+  $sql = "update `picsy`
 		SET `insta_id`='".$insta_id."', `insta_access_token`='".$insta_access_token."' ,`insta_user_name`='".$insta_name."' ,`func`=0 
 		WHERE `id` ='". $_SESSION['id'] ."'";
 		
